@@ -1,0 +1,30 @@
+//#1B153B
+.main_link_box {
+    position: relative;
+    box-sizing: border-box;
+    li {
+        border-top: 1px solid #cdd4ff;
+        cursor: pointer;
+        box-shadow: none;
+        transition: box-shadow .5s ease-in-out, background-color .5s ease-in-out;
+        position: relative;
+        a {
+            transition: color .5s ease-in-out;
+            margin-left: 15px;
+            padding: 10px 5px 10px 0;
+            display: block;
+        }
+        &:last-child {
+            border-bottom: 1px solid #cdd4ff;
+        }
+        &:hover {
+            box-shadow: 0px 0px 18px 2px #cdd4ff;
+        }
+    }
+    .selected {
+        background: #6926d6;
+        a {
+            color: #fff;
+        }
+    }
+}

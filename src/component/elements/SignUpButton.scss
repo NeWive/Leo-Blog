@@ -1,0 +1,54 @@
+.sign_up_button_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    .sign_up_button_container {
+        box-shadow: none;
+        transition: box-shadow .5s ease-in-out;
+        border-radius: 50px;
+        &:hover {
+            box-shadow: 0 4px 30px 0 rgba(236, 116, 149, 1);
+        }
+        position: relative;
+        .sign_up_button {
+            border: 0;
+            border-radius: 50px;
+            color: #fff;
+            background: #5f55af;
+            padding: 20px 30px 20px 70px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #f72585 50%, #5f55af 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+            transition: all .5s;
+            font: {
+                size: 16px;
+                weight: bold;
+            };
+        }
+        .img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            height: 59px;
+            width: 59px;
+            background: #f73585;
+            border-radius: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto 0;
+            img {
+                width: 40px;
+            }
+        }
+    }
+    .loading {
+        .sign_up_button {
+            background-position: left bottom;
+        }
+    }
+}

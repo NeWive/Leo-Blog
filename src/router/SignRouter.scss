@@ -1,0 +1,24 @@
+.exchange-enter {
+    opacity: 0;
+    transform: translateX(-90px);
+}
+.exchange-enter-active {
+    opacity: 1;
+    transform: translateX(0px);
+}
+.exchange-enter-done {
+    opacity: 1;
+    transform: translateX(0px);
+}
+.exchange-exit {
+    opacity: 1;
+    transform: translateX(0px);
+}
+.exchange-exit-active {
+    opacity: 0;
+    transform: translateX(90px);
+}
+.exchange-exit-done {
+    opacity: 0;
+    transform: translateX(90px);
+}

@@ -1,0 +1,47 @@
+.sel {
+    margin-bottom: 20px;
+    .label {
+        margin-left: 2px;
+        color: #1b153b;
+        font: {
+            size: 18px;
+            weight: 400;
+        };
+        line-height: 33px;
+    }
+    .input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:last-child {
+            input {
+                margin-left: 2px;
+            }
+        }
+        img {
+            width: 150px;
+            height: 40px;
+            cursor: pointer;
+        }
+        input {
+            margin-right: 10px;
+            background: #f3f3f3;
+            border-radius: 4px;
+            height: 44px;
+            border: none;
+            padding-left: 14px;
+            display: inline-block;
+            width: 98%;
+            font: {
+                size: 18px;
+                weight: 400;
+            };
+            color: #1b153b;
+            box-sizing: border-box;
+            transition: box-shadow .3s ease-in-out;
+            &:focus {
+                box-shadow: 0 0 0 2px rgba(105,38,214,.2);
+            }
+        }
+    }
+}

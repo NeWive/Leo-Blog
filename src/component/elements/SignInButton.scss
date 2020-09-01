@@ -1,0 +1,47 @@
+.sign_in_button_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    .sign_in_button {
+        border: 0;
+        margin: 20px;
+        text-transform: uppercase;
+        font: {
+            size: 20px;
+            weight: bold;
+        };
+        padding: 15px 50px;
+        border-radius: 50px;
+        color: #FFF;
+        outline: none;
+        position: relative;
+        background-image: linear-gradient(to right, #6253e1, #852D91);
+        box-shadow: none;
+        transition: box-shadow .5s ease-in-out;
+        &:hover {
+            box-shadow: 0 4px 30px 0 rgba(236, 116, 149, 1);
+        }
+        &:before {
+            content: '';
+            display: block;
+            background: linear-gradient(to left, rgba(255,255,255,0) 50%, rgba(255,255,255,0.4) 50%);
+            background-size: 210% 100%;
+            background-position: right bottom;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 50px;
+            transition: all 1s;
+        }
+    }
+    .loading {
+        &:before {
+            background-position: left bottom;
+        }
+    }
+}

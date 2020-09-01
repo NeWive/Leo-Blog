@@ -1,0 +1,89 @@
+#app {
+    height: 100%;
+    .header {
+        display: flex;
+        background-color: #1b153b;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px 0 36px;
+        .left {
+            .menu {
+                display: inline-block;
+                position: absolute;
+            }
+            a {
+                font: 18px solid;
+                font-weight: bolder;
+                color: #cdd4ff;
+                transition: color 1s ease;
+                &:hover {
+                    color: #fff;
+                }
+            }
+        }
+        .right {
+            .app_right {
+                display: flex;
+                flex-direction: row-reverse;
+                .app_link {
+                    border-bottom: 4px solid transparent;
+                    box-sizing: border-box;
+                    transition: border-bottom-color .5s ease;
+                    &:last-child {
+                        margin-right: 8px;
+                    }
+                    a {
+                        box-sizing: border-box;
+                        display: block;
+                        padding: 18px 10px;
+                        font: 18px solid;
+                        color: #cdd4ff;
+                        transition: color .5s ease;
+                    }
+                    &:hover {
+                        border-bottom-color: #fff;
+                        a {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .body {
+        width: 100%;
+        position: absolute;
+        top: 64px;
+        bottom: 0px;
+        left: 0px;
+        background: #fff;
+        .canvas {
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            height: 100%;
+            canvas {
+                height: 100%;
+                width: 100%;
+            }
+        }
+        .content {
+            z-index: 2;
+            background: transparent;
+            height: 100%;
+            position: relative;
+        }
+        .message_panel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            max-width: 100px;
+        }
+        .green {
+            //border-color: #b9e998;
+        }
+    }
+}
