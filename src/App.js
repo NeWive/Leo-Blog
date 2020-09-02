@@ -28,7 +28,8 @@ class App extends React.PureComponent {
                 apple: '',
                 github: '',
                 twitter: '',
-                youtube: ''
+                youtube: '',
+                userAvatar: ''
             },
             isMenuOn: false
         };

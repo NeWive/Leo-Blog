@@ -174,7 +174,7 @@ export default class Desc extends React.PureComponent {
                     timeout={500}
                     in={this.state.isEntered}
                     mountOnEnter={true}>
-                    <FunctionButton toEdit={this.clickHandler} commentHandler={this.props.commentHandler}/>
+                    <FunctionButton toEdit={this.clickHandler} commentHandler={this.props.commentHandler} user={this.props.user}/>
                 </CSSTransition>
                 <CSSTransition
                     classNames={`card`}
@@ -197,7 +197,7 @@ export default class Desc extends React.PureComponent {
                                 <div className={'desc_temp'}>
                                     <div className="avater">
                                         <div className="top" onClick={() => {
-                                            this.file.current.click();
+                                            this.props.user.auth && this.file.current.click();
                                         }}>
                                             <img src={this.props.user.avater} alt="修改头像"/>
                                         </div>

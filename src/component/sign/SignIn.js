@@ -56,7 +56,7 @@ export default class SignIn extends React.PureComponent {
                     if (result.status) {
                         this.props.handleUser({
                             username: data.username,
-                            avater: `${server}${data.avatar}`,
+                            userAvatar: `${server}${data.avatar}`,
                             auth: data.is_super
                         });
                         this.props.handleRedirect()

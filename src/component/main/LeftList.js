@@ -30,7 +30,7 @@ export default class LeftList extends React.PureComponent {
                 <div className="left_list">
                     <div className="user_info">
                         <div className="avatar">
-                            <img src={this.props.user.avater} alt=""/>
+                            <img src={this.props.user.userAvatar} alt=""/>
                         </div>
                         <div className="username">
                             {
