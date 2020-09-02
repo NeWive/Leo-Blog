@@ -1,8 +1,20 @@
 import React from "react";
 import {Link} from 'react-router-dom';
+import axios from 'axios';
+import {logout} from "../api";
+import {httpGet} from "../util";
 
 function AppLink(props) {
     //TODO: 登陆后的状态
+    let onClick = async () => {
+        let d = await httpGet(logout);
+        props.handleMessagePanel(true, d.msg, () => {
+            setTimeout(() => {
+                window.location.href = '/sign/sign_in';
+            }, 1500)
+        })
+    };
+
     return (
         <ul className={'app_right'}>
             {
@@ -17,9 +29,13 @@ function AppLink(props) {
                     </>
                 ) : (
                     <>
-
-                        <li>
-
+                        <li className={'app_link'}>
+                            <a href={''} onClick={(e) => {
+                                e.preventDefault();
+                                onClick();
+                            }}>
+                                注销
+                            </a>
                         </li>
                     </>
                 )

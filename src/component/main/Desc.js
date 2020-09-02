@@ -74,7 +74,14 @@ export default class Desc extends React.PureComponent {
             this.editing = true;
             this.setState({
                 stepOne: true
-            })
+            });
+        } else {
+            this.editing = false;
+            this.setState({
+                stepThree: false,
+                stepOne: true,
+                isSubmitting: false
+            });
         }
     }
 

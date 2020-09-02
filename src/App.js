@@ -119,7 +119,7 @@ class App extends React.PureComponent {
                             </CSSTransition>
                         </div>
                         <div className="right">
-                            <AppLink status={this.state.isSignIn}/>
+                            <AppLink status={this.state.isSignIn} handleMessagePanel={this.handleMessagePanel}/>
                         </div>
                     </div>
                     <div className="body">
