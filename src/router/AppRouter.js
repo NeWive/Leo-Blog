@@ -16,13 +16,14 @@ export default function AppRoute(props) {
                     handler={props.handler}
                     redirect={p.history.push}/>
             )}/>
-            <Route path={'/main'} render={() => (
+            <Route path={'/main'} render={(p) => (
                 <Main
                     user={props.user}
                     handleMessagePanel={props.handleMessagePanel}
                     handleUser={props.handleUser}
                     menu={props.menu}
-                    handleMenu={props.handleMenu}/>
+                    handleMenu={props.handleMenu}
+                    redirect={p.history.push}/>
             )}/>
             <Route path={'/sign'} render={(p) => (
                 <Sign
