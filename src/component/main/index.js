@@ -8,7 +8,8 @@ export default class Main extends React.PureComponent {
             <div id={'Main'}>
                 <RightContent
                     user={this.props.user}
-                    handleUser={this.props.handleUser}/>
+                    handleUser={this.props.handleUser}
+                    handleMessagePanel={this.props.handleMessagePanel}/>
             </div>
         )
     }

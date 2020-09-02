@@ -7,7 +7,6 @@ import {handleCanvas} from "./util";
 import './App.scss'
 import LeftList from "./component/main/LeftList";
 import {CSSTransition} from "react-transition-group";
-import {handleState} from "./util";
 
 class App extends React.PureComponent {
     constructor(p) {
@@ -69,7 +68,7 @@ class App extends React.PureComponent {
                     isMessagePanelOn: false,
                 })
             }, 1000);
-            messageCallback();
+            messageCallback && messageCallback();
         });
     }
 

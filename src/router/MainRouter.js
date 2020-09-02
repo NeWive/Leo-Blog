@@ -8,7 +8,12 @@ export default function MainRouter(p) {
     return (
         <Switch location={location}>
             <Route path={'/main/desc'} render={() => (
-                <Desc user={p.user} comments={p.comments} commentHandler={p.commentHandler} handleUser={p.handleUser}/>
+                <Desc
+                    user={p.user}
+                    comments={p.comments}
+                    commentHandler={p.commentHandler}
+                    handleUser={p.handleUser}
+                    handleMessagePanel={p.handleMessagePanel}/>
             )}/>
         </Switch>
     )

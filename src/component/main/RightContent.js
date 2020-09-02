@@ -27,7 +27,8 @@ export default class RightContent extends React.PureComponent {
                     user={this.props.user}
                     comments={this.state.isCommentOn}
                     commentHandler={this.handleCommentPanel}
-                    handleUser={this.props.handleUser}/>
+                    handleUser={this.props.handleUser}
+                    handleMessagePanel={this.props.handleMessagePanel}/>
                 <Comments comments={this.state.isCommentOn}/>
             </div>
         )

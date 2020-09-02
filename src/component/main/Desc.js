@@ -2,8 +2,8 @@ import React from "react";
 import {map, icon, index, infoIndex} from '../../config/mapToCN';
 import FunctionButton from "./FunctionButton";
 import SignInButton from "../elements/SignInButton";
-import {userInfo, server} from "../../api";
-import {httpGet} from "../../util";
+import {userInfo, server, edit} from "../../api";
+import {httpGet, httpPost} from "../../util";
 import {CSSTransition} from "react-transition-group";
 import './Desc.scss';
 
@@ -21,9 +21,27 @@ export default class Desc extends React.PureComponent {
             isEntered: false,
             getInfo: false
         }
+        this.name = React.createRef();
+        this.sex = React.createRef();
+        this.quote = React.createRef();
+        this.email = React.createRef();
+        this.refList = {
+            name: this.name,
+            sex: this.sex,
+            quote: this.quote,
+            email: this.email
+        }
+        this.target = {};
+        this.f = ['name', 'sex', 'email', 'quote'];
         this.clickHandler = this.clickHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
         this.getUserInfo = this.getUserInfo.bind(this);
+        this.onChangeHandler = this.onChangeHandler.bind(this);
+    }
+
+    onChangeHandler(e, type) {
+        let t = e.target;
+        this.target[type] = t.value;
     }
 
     clickHandler() {
@@ -36,16 +54,51 @@ export default class Desc extends React.PureComponent {
     }
 
     submitHandler() {
+        for(let i of this.f) {
+            if (!this.target.hasOwnProperty(i)) {
+                this.target[i] = this.props.user[i];
+            }
+        }
+        console.log(this.target);
         this.setState({
-            stepThree: false,
-            stepOne: true
+            isSubmitting: true
+        }, async () => {
+            setTimeout(async () => {
+                console.log(this.target);
+                let d, r;
+                try {
+                    d = await httpPost(edit, JSON.stringify(this.target));
+                } catch (e) {
+                    console.log(e);
+                    d = {code: '999', msg: e.message};
+                }
+                console.log(d);
+                r = {
+                    status: d.code === '000',
+                    msg: d.msg
+                };
+                this.props.handleMessagePanel(true, r.msg);
+                if (r.status) {
+                    await this.getUserInfo();
+                    this.setState({
+                        stepThree: false,
+                        stepOne: true,
+                        isSubmitting: false
+                    });
+                    this.target = {};
+                } else {
+                    this.setState({
+                        isSubmitting: false
+                    });
+                }
+            }, 1000)
         })
     }
 
     componentDidMount() {
         this.setState({
             isEntered: true
-        })
+        });
     }
 
     async getUserInfo() {
@@ -203,7 +256,9 @@ export default class Desc extends React.PureComponent {
                                                                     map[i]
                                                                 }
                                                             </p>
-                                                            <textarea/>
+                                                            <textarea ref={this.refList[i]} onChange={(e) => {
+                                                                this.onChangeHandler(e, i);
+                                                            }}/>
                                                         </>
                                                     ) : (
                                                         <>
@@ -212,7 +267,9 @@ export default class Desc extends React.PureComponent {
                                                                     map[i]
                                                                 }
                                                             </span>
-                                                            <input type="text"/>
+                                                            <input type="text" ref={this.refList[i]} onChange={(e) => {
+                                                                this.onChangeHandler(e, i);
+                                                            }}/>
                                                         </>
                                                     )
                                                 }
