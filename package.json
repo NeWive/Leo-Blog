@@ -38,5 +38,6 @@
   },
   "devDependencies": {
     "uuid": "^8.3.0"
-  }
+  },
+  "homepage": "./"
 }

@@ -2,7 +2,9 @@ import React from "react";
 import {map, icon, index, infoIndex} from '../../config/mapToCN';
 import FunctionButton from "./FunctionButton";
 import SignInButton from "../elements/SignInButton";
-import {userInfo, server, edit} from "../../api";
+import Loading from "../elements/Loading";
+import axios from 'axios';
+import {userInfo, server, edit, upload} from "../../api";
 import {httpGet, httpPost} from "../../util";
 import {CSSTransition} from "react-transition-group";
 import './Desc.scss';
@@ -37,6 +39,29 @@ export default class Desc extends React.PureComponent {
         this.submitHandler = this.submitHandler.bind(this);
         this.getUserInfo = this.getUserInfo.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
+        this.uploadImg = this.uploadImg.bind(this);
+        this.file = React.createRef();
+    }
+
+    async uploadImg(e) {
+        let file = e.target.files[0];
+        let formData = new  FormData();
+        formData.append('img', file, file.name);
+        let {data} = await axios({
+            url: upload,
+            method: 'POST',
+            data: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+        });
+        console.log(data);
+        this.props.handleMessagePanel(true, data.msg);
+        if(data.code === '000') {
+            this.props.handleUser({
+                avater: `${server}${data.path}`
+            })
+        }
     }
 
     onChangeHandler(e, type) {
@@ -59,12 +84,10 @@ export default class Desc extends React.PureComponent {
                 this.target[i] = this.props.user[i];
             }
         }
-        console.log(this.target);
         this.setState({
             isSubmitting: true
         }, async () => {
             setTimeout(async () => {
-                console.log(this.target);
                 let d, r;
                 try {
                     d = await httpPost(edit, JSON.stringify(this.target));
@@ -136,8 +159,16 @@ export default class Desc extends React.PureComponent {
     render() {
         return (
             <>
-
-                <FunctionButton toEdit={this.clickHandler} commentHandler={this.props.commentHandler}/>
+                <input type='file' ref={this.file} style={{
+                    display: 'none'
+                }}  onChange={this.uploadImg}/>
+                <CSSTransition
+                    classNames={'function-panel'}
+                    timeout={500}
+                    in={this.state.isEntered}
+                    mountOnEnter={true}>
+                    <FunctionButton toEdit={this.clickHandler} commentHandler={this.props.commentHandler}/>
+                </CSSTransition>
                 <CSSTransition
                     classNames={`card`}
                     timeout={500}
@@ -152,11 +183,16 @@ export default class Desc extends React.PureComponent {
                         <div className="desc" style={{
                             marginLeft: this.props.comments ? '-500px' : '0px',
                         }}>
+                            {
+                                !this.state.getInfo && <Loading/>
+                            }
                             <CSSTransition classNames={'info-opacity'} in={this.state.getInfo} timeout={500}>
                                 <div className={'desc_temp'}>
                                     <div className="avater">
-                                        <div className="top">
-                                            <img src={this.props.user.avater} alt=""/>
+                                        <div className="top" onClick={() => {
+                                            this.file.current.click();
+                                        }}>
+                                            <img src={this.props.user.avater} alt="修改头像"/>
                                         </div>
                                         <div className="links">
                                             {

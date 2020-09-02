@@ -59,13 +59,29 @@
         }
     }
     .comment_box {
+        height: 333px;
         ul {
             overflow-x: hidden;
             overflow-y: auto;
-            height: 333px;
-            padding: 10px 5px;
+            height: 100%;
+            padding: 5px 5px 10px;
+            opacity: 0;
+            transition: opacity .5s ease-in-out;
+        }
+        .comment-animation-enter {
+            opacity: 0;
+        }
+        .comment-animation-enter-done {
+            opacity: 1;
+        }
+        .comment-animation-exit {
+            opacity: 1;
+        }
+        .comment-animation-exit-done {
+            opacity: 0;
         }
         .comment_sel {
+            padding: 10px;
             border: 1px solid #cdd4ff;
             border-left-color: transparent;
             border-right-color: transparent;
