@@ -205,7 +205,9 @@ export default class Desc extends React.PureComponent {
                                             {
                                                 index.map((i) => {
                                                     return (
-                                                        <a href={this.props.user[i]} key={i}>
+                                                        <a href={this.props.user[i]} key={i} onClick={(e) => {
+                                                            !this.props.user[i] && e.preventDefault();
+                                                        }}>
                                                             <img src={icon[i]} alt={i}/>
                                                         </a>
                                                     )
