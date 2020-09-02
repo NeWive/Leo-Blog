@@ -9,7 +9,7 @@ export default class Sign extends React.PureComponent {
             <div id="Sign">
                 <SignLink/>
                 <div className="sign_router">
-                    <SignRouter/>
+                    <SignRouter handleMessagePanel={this.props.handleMessagePanel}/>
                 </div>
             </div>
         );

@@ -9,14 +9,16 @@ export default function AppRoute(props) {
         <Switch>
             <Route exact path={'/'} render={(p) => (
                 <CheckSignStatus
-                    isSignedUp={p.isSignedIn}
+                    isSignIn={props.isSignIn}
                     handler={props.handler}
                     redirect={p.history.push}/>
             )}/>
             <Route path={'/main'} render={() => (
                 <Main user={props.user}/>
             )}/>
-            <Route path={'/sign'} component={Sign}/>
+            <Route path={'/sign'} render={(p) => (
+                <Sign handleMessagePanel={props.handleMessagePanel}/>
+            )}/>
         </Switch>
     );
 }

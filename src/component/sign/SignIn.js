@@ -1,8 +1,8 @@
 import React from 'react';
 import SignInButton from "../elements/SignInButton";
 import SignForm from './SignForm';
+import axios from 'axios';
 import {handleState} from "../../util";
-import {captcha} from "../../api";
 import './SignIn.scss';
 
 export default class SignIn extends React.PureComponent {
@@ -11,11 +11,19 @@ export default class SignIn extends React.PureComponent {
         this.state = {
             isLoading: false
         };
+        this.username = React.createRef();
+        this.password = React.createRef();
+        this.captcha = React.createRef();
+        this.refList = {
+            username: this.username,
+            password: this.password,
+            captcha: this.captcha
+        };
         this.submitHandler = this.submitHandler.bind(this);
     }
 
     componentDidMount() {
-        handleState.call(this, {captcha})
+
     }
 
     submitHandler() {
@@ -27,9 +35,11 @@ export default class SignIn extends React.PureComponent {
     render() {
         return (
             <div className="sign_in">
-                <SignForm/>
+                <SignForm refList={this.refList}/>
                 <div className="submit">
-                    <SignInButton isLoading={this.state.isLoading} callback={this.submitHandler}/>
+                    <SignInButton isLoading={this.state.isLoading} callback={this.submitHandler}>
+                        Sign In
+                    </SignInButton>
                 </div>
             </div>
         );

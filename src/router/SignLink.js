@@ -23,16 +23,6 @@ export default class SignLink extends React.PureComponent {
         handleState.call(this, {flag});
     }
 
-    componentDidMount() {
-        let flag = /sign_in/.test(window.location.href) ? 0 : 1;
-        this.clickHandler(flag);
-        window.addEventListener('hashchange', this.hashChangeHandler);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('hashchange', this.hashChangeHandler);
-    }
-
     render() {
         return (
             <ul className="sign_link_box">

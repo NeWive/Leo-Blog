@@ -2,20 +2,65 @@ import React from 'react';
 import SignForm from './SignForm';
 import SignUpButton from "../elements/SignUpButton";
 import './SignUp.scss';
-import {handleState} from "../../util";
+import {signInList} from "../../config/signInput";
+import {checkHttpStatus, handleState, httpPost} from "../../util";
+import {register} from "../../api";
 
-export default class SignIn extends React.PureComponent {
+export default class SignUp extends React.PureComponent {
     constructor(p) {
         super(p);
         this.state = {
             isLoading: false
         };
+        this.username = React.createRef();
+        this.password = React.createRef();
+        this.captcha = React.createRef();
+        this.refList = {
+            username: this.username,
+            password: this.password,
+            captcha: this.captcha
+        };
         this.submitHandler = this.submitHandler.bind(this);
     }
 
-    submitHandler() {
+    async submitHandler() {
+        let obj = {};
+        for(let i of signInList) {
+            obj[i.name] = this.refList[i.name].current.value;
+        }
         if(!this.state.isLoading) {
-            handleState.call(this, {isLoading: true})
+            let d, r;
+            try {
+                handleState.call(this, {isLoading: true})
+                d = await httpPost(register, JSON.stringify(obj));
+                console.log(d);
+            } catch (e) {
+                console.log(e);
+                d = {code: '999', msg: e.message()};
+            }
+            r = {
+                status: d.code === '000',
+                msg: d.msg
+            }
+            console.log(r);
+            let callback = ((r, context) => {
+                let result = r;
+                let ctx = context;
+                console.log(ctx);
+                return () => {
+                    if (result.status) {
+                        setTimeout(() => {
+                            ctx.props.redirect('/sign/sign_in');
+                        }, 1200);
+                    }
+                    setTimeout(() => {
+                        ctx.setState({
+                            isLoading: false
+                        });
+                    }, 1000);
+                }
+            })(r, this);
+            this.props.handleMessagePanel(true, r.msg, callback);
         }
     }
 
@@ -26,9 +71,11 @@ export default class SignIn extends React.PureComponent {
     render() {
         return (
             <div className="sign_up">
-                <SignForm/>
+                <SignForm refList={this.refList}/>
                 <div className="submit">
-                    <SignUpButton isLoading={this.state.isLoading} callback={this.submitHandler}/>
+                    <SignUpButton isLoading={this.state.isLoading} callback={this.submitHandler}>
+                        Sign Up
+                    </SignUpButton>
                 </div>
             </div>
         );

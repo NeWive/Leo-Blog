@@ -1,0 +1,232 @@
+.desc {
+    width: 900px;
+    height: 500px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 0px 18px 10px #cdd4ff;
+    box-sizing: border-box;
+    padding: 50px 60px;
+    transition: all .5s ease-in-out;
+    transform-style: preserve-3d;
+    .avater {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 80px;
+        .top {
+            border-radius: 100%;
+            overflow: hidden;
+            width: 300px;
+            height: 300px;
+            box-shadow: none;
+            transition: box-shadow .3s ease-in-out;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+            &:hover {
+                box-shadow: 0px 0px 12px 4px #cdd4ff;
+            }
+        }
+        .links {
+            margin-top: 30px;
+            box-sizing: border-box;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            a {
+                width: 60px;
+                height: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                z-index: 8;
+                overflow: hidden;
+                border-radius: 100%;
+                &:before {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 7;
+                    position: absolute;
+                    //border-radius: 100%;
+                    background-image: linear-gradient(to right, #6253e1, #852D91);
+                    left: -100%;
+                    transition: left .5s ease-in-out;
+                    opacity: .5;
+                }
+                &:hover:before {
+                    left: 0;
+                }
+                img {
+                    position: relative;
+                    z-index: 10;
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+        }
+    }
+    .info {
+        width: 300px;
+        height: 280px;
+        display: inline-block;
+        padding: 70px 0 0 80px;
+        vertical-align: top;
+        //margin-left: 80px;
+        position: absolute;
+        transform-style: preserve-3d;
+        transition: all 1s ease-in-out;
+        transform-origin: left;
+        backface-visibility: hidden;
+        &:before {
+            content: '';
+            display: block;
+            height: 250px;
+            width: 1px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background: #cdd4ff;
+            margin: auto 0;
+        }
+        &:after {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: -10px;
+            top: 0;
+            bottom: 0;
+            border-radius: 100%;
+            margin: auto 0;
+            text-align: center;
+            background: #fff url(../../assets/icons8-rhombus-32.png) center center no-repeat;
+            background-size: 15px;
+        }
+        .info_sel {
+            position: relative;
+            margin-bottom: 30px;
+            .info_label, .info_content {
+                font-size: 22px;
+            }
+            .info_content {
+                transition: color .5s ease-in-out;
+                cursor: pointer;
+                &:hover {
+                    color: #6926d6;
+                }
+            }
+            .motto {
+                width: 283px;
+                margin-top: 10px;
+                text-indent: 30px;
+                font-size: 18px;
+            }
+        }
+    }
+    .edit {
+        opacity: 0;
+        transition: all .5s ease-in-out;
+        position: absolute;
+        padding-top: 5px;
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        input {
+            vertical-align: middle;
+            width: 210px;
+            margin-right: 10px;
+            background: #f3f3f3;
+            border-radius: 4px;
+            height: 30px;
+            border: none;
+            padding-left: 14px;
+            display: inline-block;
+            font: {
+                size: 18px;
+                weight: 400;
+            };
+            color: #1b153b;
+            box-sizing: border-box;
+            transition: box-shadow .3s ease-in-out;
+            &:focus {
+                box-shadow: 0 0 0 2px rgba(105,38,214,.2);
+            }
+        }
+        textarea {
+            margin-right: 10px;
+            background: #f3f3f3;
+            border-radius: 4px;
+            height: 120px;
+            border: none;
+            padding: 14px;
+            display: inline-block;
+            width: 92%;
+            margin-top: 10px;
+            font: {
+                size: 18px;
+                weight: 400;
+            };
+            color: #1b153b;
+            box-sizing: border-box;
+            transition: box-shadow .3s ease-in-out;
+            &:focus {
+                box-shadow: 0 0 0 2px rgba(105,38,214,.2);
+            }
+        }
+        .sign_in_button_box {
+            height: 30px;
+        }
+    }
+    .rotation-three-enter {
+        opacity: 0;
+    }
+    .rotation-three-enter-done {
+        opacity: 1;
+    }
+    .rotation-three-exit {
+        opacity: 1;
+    }
+    .rotation-three-exit-done {
+        opacity: 0;
+    }
+}
+.rotation-one-enter {
+    //transform: rotateX(25deg);
+    box-shadow: 0px 0px 18px 10px #cdd4ff;
+    transform: rotateX(0deg);
+}
+.rotation-one-enter-done {
+    transform: rotateX(35deg);
+    box-shadow: 16px 16px 18px 10px #cdd4ff;
+}
+.rotation-one-exit {
+    transform: rotateX(35deg);
+    box-shadow: 16px 16px 18px 10px #cdd4ff;
+}
+.rotation-one-exit-done {
+    box-shadow: 0px 0px 18px 10px #cdd4ff;
+    transform: rotateX(0deg);
+}
+.rotation-two-enter {
+    opacity: 1;
+    transform: rotateY(0);
+}
+.rotation-two-enter-done {
+    opacity: 0;
+    transform: rotateY(-180deg);
+}
+.rotation-two-exit {
+    opacity: 0;
+    transform: rotateY(-180deg);
+}
+.rotation-two-exit-done {
+    opacity: 1;
+    transform: rotateY(0);
+}

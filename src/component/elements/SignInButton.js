@@ -7,7 +7,9 @@ export default function SignInButton(p) {
             <button className={`sign_in_button ${p.isLoading ? 'loading' : ''}`} onClick={() => {
                 p.callback();
             }}>
-                Sign In
+                {
+                    p.children
+                }
             </button>
         </div>
     )

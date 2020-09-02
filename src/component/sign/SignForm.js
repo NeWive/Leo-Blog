@@ -47,7 +47,7 @@ export default class SignForm extends React.PureComponent {
                                 }
                             </div>
                             <div className="input">
-                                <input type="text"/>
+                                <input type={i.type} ref={this.props.refList[i.name]}/>
                                 {
                                     i.name === 'captcha' && <img src={this.state.captcha} alt="" onClick={this.handleCaptcha}/>
                                 }

@@ -181,9 +181,10 @@ async function httpPost(url, args) {
         let {data} = await axios({
             method: 'POST',
             url,
-            data: {
-                ...args
-            }
+            data: args,
+            headers: {
+                'Content-Type': 'application/json'
+            },
         });
         return data;
     } catch(e) {
@@ -193,10 +194,10 @@ async function httpPost(url, args) {
 
 function checkHttpStatus(o) {
     if (o.hasOwnProperty('code') && o.code === '000') {
-        return {status: true};
+        return {status: true, msg: '成功'};
     } else {
         if(statusMap.hasOwnProperty(o.code)) {
-            return {status: false, message: statusMap[o.code]};
+            return {status: false, msg: o.msg};
         } else {
             return {status: false};
         }
