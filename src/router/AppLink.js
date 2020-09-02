@@ -11,7 +11,7 @@ function AppLink(props) {
         props.handleMessagePanel(true, d.msg, () => {
             setTimeout(() => {
                 window.location.href = '/sign/sign_in';
-            }, 1500)
+            }, 1000)
         })
     };
 
