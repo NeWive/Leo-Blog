@@ -2,11 +2,14 @@ import React from 'react';
 import Sign from '../component/sign';
 import Main from '../component/main';
 import CheckSignStatus from "../component/CheckSignStatus";
-import {Switch, Route} from 'react-router-dom';
+import {TransitionGroup, CSSTransition} from "react-transition-group";
+import {Switch, Route, useLocation} from 'react-router-dom';
+import './AppRouter.scss';
 
 export default function AppRoute(props) {
+    let location = useLocation();
     return (
-        <Switch>
+        <Switch location={location}>
             <Route exact path={'/'} render={(p) => (
                 <CheckSignStatus
                     isSignIn={props.isSignIn}
@@ -14,10 +17,15 @@ export default function AppRoute(props) {
                     redirect={p.history.push}/>
             )}/>
             <Route path={'/main'} render={() => (
-                <Main user={props.user}/>
+                <Main
+                    user={props.user}
+                    handleMessagePanel={props.handleMessagePanel}
+                    handleUser={props.handleUser}/>
             )}/>
             <Route path={'/sign'} render={(p) => (
-                <Sign handleMessagePanel={props.handleMessagePanel}/>
+                <Sign
+                    handleMessagePanel={props.handleMessagePanel}
+                    handleUser={props.handleUser}/>
             )}/>
         </Switch>
     );

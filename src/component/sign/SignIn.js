@@ -1,9 +1,10 @@
 import React from 'react';
 import SignInButton from "../elements/SignInButton";
 import SignForm from './SignForm';
-import axios from 'axios';
-import {handleState} from "../../util";
+import {handleState, httpPost} from "../../util";
 import './SignIn.scss';
+import {signInList} from "../../config/signInput";
+import {login, server} from "../../api";
 
 export default class SignIn extends React.PureComponent {
     constructor(p) {
@@ -22,13 +23,55 @@ export default class SignIn extends React.PureComponent {
         this.submitHandler = this.submitHandler.bind(this);
     }
 
-    componentDidMount() {
-
-    }
-
-    submitHandler() {
+    async submitHandler() {
+        let obj = {};
+        for(let i of signInList) {
+            obj[i.name] = this.refList[i.name].current.value;
+        }
         if(!this.state.isLoading) {
-            handleState.call(this, {isLoading: true})
+            let d, r;
+            try {
+                handleState.call(this, {isLoading: true});
+                d = await httpPost(login, JSON.stringify(obj));
+            } catch (e) {
+                console.log(e);
+                d = {code: '999', msg: e.message};
+            }
+            console.log(d);
+            r = {
+                status: d.code === '000',
+                msg: d.msg
+            };
+            // handleUser
+            // avatar
+            // username
+            // auth: true
+
+            let after = ((r, context, d) => {
+                let result = r;
+                let ctx = context;
+                let data = d;
+                console.log(ctx);
+                return () => {
+                    if (result.status) {
+                        this.props.handleUser({
+                            username: data.username,
+                            avater: `${server}${data.avatar}`,
+                            auth: data.is_super
+                        });
+                        this.props.handleRedirect()
+                        setTimeout(() => {
+                            ctx.props.redirect('/main');
+                        }, 1500);
+                    }
+                    setTimeout(() => {
+                        ctx.setState({
+                            isLoading: false
+                        });
+                    }, 1000);
+                }
+            })(r, this, d);
+            this.props.handleMessagePanel(true, r.msg, after);
         }
     }
 

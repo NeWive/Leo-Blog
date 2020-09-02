@@ -4,17 +4,17 @@ import twitter from '../assets/icons8-twitter-64.png';
 import youtube from '../assets/icons8-youtube-64.png';
 
 const map = {
-    username: '姓名：',
+    name: '姓名：',
     sex: '性别：',
     email: '邮箱：',
-    motto: '座右铭：',
+    quote: '座右铭：',
 };
 
 const infoIndex = [
-    'username',
+    'name',
     'sex',
     'email',
-    'motto',
+    'quote',
 ]
 
 const icon = {

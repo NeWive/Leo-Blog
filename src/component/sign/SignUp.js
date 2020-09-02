@@ -3,7 +3,7 @@ import SignForm from './SignForm';
 import SignUpButton from "../elements/SignUpButton";
 import './SignUp.scss';
 import {signInList} from "../../config/signInput";
-import {checkHttpStatus, handleState, httpPost} from "../../util";
+import {handleState, httpPost} from "../../util";
 import {register} from "../../api";
 
 export default class SignUp extends React.PureComponent {
@@ -33,7 +33,6 @@ export default class SignUp extends React.PureComponent {
             try {
                 handleState.call(this, {isLoading: true})
                 d = await httpPost(register, JSON.stringify(obj));
-                console.log(d);
             } catch (e) {
                 console.log(e);
                 d = {code: '999', msg: e.message()};
@@ -42,11 +41,9 @@ export default class SignUp extends React.PureComponent {
                 status: d.code === '000',
                 msg: d.msg
             }
-            console.log(r);
             let callback = ((r, context) => {
                 let result = r;
                 let ctx = context;
-                console.log(ctx);
                 return () => {
                     if (result.status) {
                         setTimeout(() => {

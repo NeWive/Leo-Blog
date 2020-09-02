@@ -19,7 +19,7 @@ export default function SignRouter(props) {
                         <Redirect to={'/sign/sign_in'}/>
                     </Route>
                     <Route path={'/sign/sign_in'} render={(p) => (
-                        <SignIn  redirect={p.history.push}/>
+                        <SignIn handleMessagePanel={props.handleMessagePanel} redirect={p.history.push} handleUser={props.handleUser} handleRedirect={props.handleRedirect}/>
                     )}/>
                     <Route path={'/sign/sign_up'} render={(p) => (
                         <SignUp handleMessagePanel={props.handleMessagePanel}  redirect={p.history.push}/>

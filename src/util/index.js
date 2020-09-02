@@ -178,7 +178,7 @@ async function httpGet(url) {
 
 async function httpPost(url, args) {
     try {
-        let {data} = await axios({
+        let d = await axios({
             method: 'POST',
             url,
             data: args,
@@ -186,7 +186,7 @@ async function httpPost(url, args) {
                 'Content-Type': 'application/json'
             },
         });
-        return data;
+        return d.data;
     } catch(e) {
         return e;
     }

@@ -1,7 +1,6 @@
 import React from 'react';
 import AppLink from "./router/AppLink";
 import AppRoute from './router/AppRouter';
-import avater from './assets/avatar_test.jpg';
 import Menu from './assets/menu.png';
 import {BrowserRouter} from 'react-router-dom';
 import {handleCanvas} from "./util";
@@ -20,16 +19,17 @@ class App extends React.PureComponent {
             isMessagePanelOn: false,
             message: '',
             userInfo: {
-                auth: 'author',
-                username: '刘狗蛋',
-                avater: avater,
-                sex: '男',
-                email: '738767136@qq.com',
-                motto: '嘤嘤嘤嘤嘤嘤嘤嘤嘤嘤嘤嘤嘤',
-                apple: 'https://www.bilibili.com',
-                github: 'https://www.github.com',
-                twitter: 'https://www.twitter.com',
-                youtube: 'https://www.youtube.com'
+                auth: '',
+                username: '',
+                avater: '',
+                name:'',
+                sex: '',
+                email: '',
+                quote: '',
+                apple: '',
+                github: '',
+                twitter: '',
+                youtube: ''
             },
             isMenuOn: false
         };
@@ -37,11 +37,28 @@ class App extends React.PureComponent {
         this.handleIsSignIn = this.handleIsSignIn.bind(this);
         this.handleMenu = this.handleMenu.bind(this);
         this.handleMessagePanel = this.handleMessagePanel.bind(this);
+        this.handleUserInfo = this.handleUserInfo.bind(this);
     }
 
-    handleMessagePanel(toggle, msg, cb) {
-        console.log('handling');
-        console.log(msg);
+    handleUserInfo(o, userCallback) {
+        this.setState((pre) =>{
+            let preState = {};
+            for(let i in pre.userInfo) {
+                preState[i] = pre.userInfo[i];
+            }
+            for(let i in o) {
+                preState[i] = o[i];
+            }
+            return {
+                userInfo: preState,
+                isSignIn: true
+            }
+        }, () => {
+            userCallback && userCallback();
+        });
+    }
+
+    handleMessagePanel(toggle, msg, messageCallback) {
         clearTimeout(this.timer);
         this.setState({
             isMessagePanelOn: toggle,
@@ -52,7 +69,7 @@ class App extends React.PureComponent {
                     isMessagePanelOn: false,
                 })
             }, 1000);
-            cb();
+            messageCallback();
         });
     }
 
@@ -114,7 +131,8 @@ class App extends React.PureComponent {
                             <AppRoute isSignIn={this.state.isSignIn}
                                       handler={this.handleIsSignIn}
                                       user={this.state.userInfo}
-                                      handleMessagePanel={this.handleMessagePanel}/>
+                                      handleMessagePanel={this.handleMessagePanel}
+                                      handleUser={this.handleUserInfo}/>
                         </div>
                         <CSSTransition in={this.state.isMessagePanelOn} classNames={'message-panel'} timeout={500} mountOnEnter={true} unmountOnExit={true}>
                             <div className={`message_panel`}>

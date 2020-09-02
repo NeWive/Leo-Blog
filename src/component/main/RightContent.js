@@ -23,7 +23,11 @@ export default class RightContent extends React.PureComponent {
     render() {
         return (
             <div className="right_content">
-                <MainRouter user={this.props.user} comments={this.state.isCommentOn} commentHandler={this.handleCommentPanel}/>
+                <MainRouter
+                    user={this.props.user}
+                    comments={this.state.isCommentOn}
+                    commentHandler={this.handleCommentPanel}
+                    handleUser={this.props.handleUser}/>
                 <Comments comments={this.state.isCommentOn}/>
             </div>
         )
