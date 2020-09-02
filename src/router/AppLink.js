@@ -1,6 +1,5 @@
 import React from "react";
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 import {logout} from "../api";
 import {httpGet} from "../util";
 
@@ -30,7 +29,7 @@ function AppLink(props) {
                 ) : (
                     <>
                         <li className={'app_link'}>
-                            <a href={''} onClick={(e) => {
+                            <a href={'./'} onClick={(e) => {
                                 e.preventDefault();
                                 onClick();
                             }}>

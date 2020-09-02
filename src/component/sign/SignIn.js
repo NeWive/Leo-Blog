@@ -37,7 +37,6 @@ export default class SignIn extends React.PureComponent {
                 console.log(e);
                 d = {code: '999', msg: e.message};
             }
-            console.log(d);
             r = {
                 status: d.code === '000',
                 msg: d.msg
@@ -51,7 +50,6 @@ export default class SignIn extends React.PureComponent {
                 let result = r;
                 let ctx = context;
                 let data = d;
-                console.log(ctx);
                 return () => {
                     if (result.status) {
                         this.props.handleUser({
