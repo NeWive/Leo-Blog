@@ -2,6 +2,7 @@ import React from "react";
 import Desc from "../component/main/Desc";
 import {Switch, Route, useLocation} from 'react-router-dom';
 import './MainRouter.scss';
+import RightContent from "../component/main/RightContent";
 
 export default function MainRouter(p) {
     let location = useLocation();
@@ -13,7 +14,9 @@ export default function MainRouter(p) {
                     comments={p.comments}
                     commentHandler={p.commentHandler}
                     handleUser={p.handleUser}
-                    handleMessagePanel={p.handleMessagePanel}/>
+                    handleMessagePanel={p.handleMessagePanel}
+                    menu={p.menu}
+                    handleMenu={p.handleMenu}/>
             )}/>
         </Switch>
     )

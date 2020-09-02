@@ -13,6 +13,7 @@ export default class RightContent extends React.PureComponent {
     }
 
     handleCommentPanel (v) {
+        this.props.menu && this.props.handleMenu();
         this.setState((p) => {
             return {
                 isCommentOn: !p.isCommentOn
@@ -28,7 +29,9 @@ export default class RightContent extends React.PureComponent {
                     comments={this.state.isCommentOn}
                     commentHandler={this.handleCommentPanel}
                     handleUser={this.props.handleUser}
-                    handleMessagePanel={this.props.handleMessagePanel}/>
+                    handleMessagePanel={this.props.handleMessagePanel}
+                    menu={this.props.menu}
+                    handleMenu={this.props.handleMenu}/>
                 <Comments comments={this.state.isCommentOn} handleMessagePanel={this.props.handleMessagePanel}/>
             </div>
         )

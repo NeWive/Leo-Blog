@@ -20,7 +20,9 @@ export default function AppRoute(props) {
                 <Main
                     user={props.user}
                     handleMessagePanel={props.handleMessagePanel}
-                    handleUser={props.handleUser}/>
+                    handleUser={props.handleUser}
+                    menu={props.menu}
+                    handleMenu={props.handleMenu}/>
             )}/>
             <Route path={'/sign'} render={(p) => (
                 <Sign

@@ -131,7 +131,9 @@ class App extends React.PureComponent {
                                       handler={this.handleIsSignIn}
                                       user={this.state.userInfo}
                                       handleMessagePanel={this.handleMessagePanel}
-                                      handleUser={this.handleUserInfo}/>
+                                      handleUser={this.handleUserInfo}
+                                      menu={this.state.isMenuOn}
+                                      handleMenu={this.handleMenu}/>
                         </div>
                         <CSSTransition in={this.state.isMessagePanelOn} classNames={'message-panel'} timeout={500} mountOnEnter={true} unmountOnExit={true}>
                             <div className={`message_panel`}>
