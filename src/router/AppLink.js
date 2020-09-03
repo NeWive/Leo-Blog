@@ -13,7 +13,7 @@ function AppLink(props) {
             return () => {
                 props.handleMessagePanel(true, d.msg, () => {
                     setTimeout(() => {
-                        props.logoutRedirect('/sign/sign_in');
+                        window.location.href = '/'
                     }, 1000)
                 });
             }

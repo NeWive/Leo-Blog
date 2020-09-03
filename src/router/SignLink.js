@@ -19,8 +19,6 @@ export default class SignLink extends React.PureComponent {
 
     hashChangeHandler() {
         let flag = /sign_in/.test(window.location.href) ? 0 : 1;
-        console.log('flag:' + flag);
-
         handleState.call(this, {flag});
     }
 
