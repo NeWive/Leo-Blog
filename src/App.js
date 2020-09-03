@@ -62,10 +62,11 @@ class App extends React.PureComponent {
             isMenuOn: false,
             isSignIn: false,
         }, cb);
+        window.changeEvent = new Event('urlChange');
     }
 
     handleLogoutRedirect (cb) {
-        this.logoutRedirect = cb;
+        this.logoeutRedirect = cb;
     }
 
     handleUserInfo(o, userCallback) {

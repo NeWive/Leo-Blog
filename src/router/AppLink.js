@@ -21,15 +21,23 @@ function AppLink(props) {
         props.logoutIntState(cb);
     };
 
+    let changeHandler = () => {
+        window.dispatchEvent(new Event('urlChange'));
+    }
+
     return (
         <ul className={'app_right'}>
             {
                 !props.status ? (
                     <>
-                        <li className={'app_link'}>
+                        <li className={'app_link'} onClick={() => {
+                            changeHandler()
+                        }}>
                             <Link to={'/sign/sign_up'}>注册</Link>
                         </li>
-                        <li className={'app_link'}>
+                        <li className={'app_link'} onClick={() => {
+                            changeHandler()
+                        }}>
                             <Link to={'/sign/sign_in'}>登陆</Link>
                         </li>
                     </>

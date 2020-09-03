@@ -10,6 +10,7 @@ export default class SignLink extends React.PureComponent {
             flag: 0
         };
         this.hashChangeHandler = this.hashChangeHandler.bind(this);
+        this.handler = null;
     }
 
     clickHandler(flag) {
@@ -21,6 +22,20 @@ export default class SignLink extends React.PureComponent {
         console.log('flag:' + flag);
 
         handleState.call(this, {flag});
+    }
+
+    componentDidMount() {
+        this.handler = ((context) => {
+            let ctx = context;
+            return () => {
+                ctx.hashChangeHandler();
+            }
+        })(this);
+        window.addEventListener('urlChange', this.handler);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('urlChange', this.handler);
     }
 
     render() {
