@@ -25,10 +25,12 @@ export default class CheckSignStatus extends React.Component {
             let statusCallback = ((context) => {
                 let ctx = context;
                 return  () => {
-                    console.log('登陆状态'+ ctx.props.isSignUp);
-                    this.props.redirect(ctx.props.isSignUp ? '/main' : '/sign');
+                    console.log(ctx);
+                    console.log('登陆状态'+ ctx.props.isSignIn);
+                    this.props.redirect(ctx.props.isSignIn ? '/main' : '/sign');
                 }
             })(this);
+            console.log('d.status' + d.status);
             this.props.handler(d.status, statusCallback);
         }
         // if (r.status) {
