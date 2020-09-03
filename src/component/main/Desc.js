@@ -256,16 +256,29 @@ export default class Desc extends React.PureComponent {
                                                                 </>
                                                             ) : (
                                                                 <>
-                                                        <span className={'info_label'}>
-                                                            {
-                                                                map[i]
-                                                            }
-                                                        </span>
+                                                                    <span className={'info_label'}>
+                                                                        {
+                                                                            map[i]
+                                                                        }
+                                                                    </span>
                                                                     <span className={'info_content'}>
-                                                            {
-                                                                this.props.user[i]
-                                                            }
-                                                        </span>
+                                                                        {
+                                                                            (() => {
+                                                                                if(i !== 'sex') {
+                                                                                    return this.props.user[i];
+                                                                                } else {
+                                                                                    switch (this.props.user[i]) {
+                                                                                        case 'M':
+                                                                                            return '男';
+                                                                                        case 'F':
+                                                                                            return '女';
+                                                                                        default:
+                                                                                            return '';
+                                                                                    }
+                                                                                }
+                                                                            })()
+                                                                        }
+                                                                    </span>
                                                                 </>
                                                             )
                                                         }

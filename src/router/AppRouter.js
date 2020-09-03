@@ -13,12 +13,12 @@ export default function AppRoute(props) {
                 <CheckSignStatus
                     isSignIn={props.isSignIn}
                     handleUser={props.handleUser}
-                    handleLogoutRedirect={props.handleLogoutRedirect}
                     handler={props.handler}
                     redirect={p.history.push}/>
             )}/>
             <Route path={'/main'} render={(p) => (
                 <Main
+                    handleLogoutRedirect={props.handleLogoutRedirect}
                     user={props.user}
                     handleMessagePanel={props.handleMessagePanel}
                     handleUser={props.handleUser}
