@@ -51,6 +51,7 @@ export default class SignUp extends React.PureComponent {
                             window.dispatchEvent(new Event('urlChange'));
                         }, 1200);
                     }
+                    window.dispatchEvent(new Event('changeCaptcha'));
                     setTimeout(() => {
                         ctx.setState({
                             isLoading: false

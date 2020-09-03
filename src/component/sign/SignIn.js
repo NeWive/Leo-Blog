@@ -62,6 +62,7 @@ export default class SignIn extends React.PureComponent {
                             ctx.props.redirect('/main');
                         }, 1500);
                     }
+                    window.dispatchEvent(new Event('changeCaptcha'));
                     setTimeout(() => {
                         ctx.setState({
                             isLoading: false

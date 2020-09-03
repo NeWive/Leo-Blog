@@ -13,6 +13,7 @@ export default class SignForm extends React.PureComponent {
         };
         this.lastTime = null;
         this.gapTime = 1000;
+        this.changeListener = null;
         this.handleCaptcha = this.handleCaptcha.bind(this);
     }
 
@@ -21,7 +22,18 @@ export default class SignForm extends React.PureComponent {
     }
 
     componentDidMount() {
-        handleState.call(this, {captcha: `${captcha}?t=${this.genRandomNumber()}`})
+        this.changeListener = ((context) => {
+            let ctx = context;
+            return () => {
+                handleState.call(ctx, {captcha: `${captcha}?t=${this.genRandomNumber()}`});
+            }
+        })(this);
+        handleState.call(this, {captcha: `${captcha}?t=${this.genRandomNumber()}`});
+        window.addEventListener('changeCaptcha', this.changeListener);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('changeCaptcha', this.changeListener)
     }
 
     handleCaptcha(e) {
