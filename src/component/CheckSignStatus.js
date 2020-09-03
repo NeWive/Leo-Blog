@@ -7,6 +7,13 @@ export default class CheckSignStatus extends React.Component {
         let d = await httpGet(status);
         // let r = checkHttpStatus(d);
         //
+        let redirect = ((context) => {
+            let ctx = context;
+            return (url) => {
+                ctx.props.redirect(url);
+            }
+        })(this);
+        this.props.handleLogoutRedirect(redirect);
         if(d.code === '000') {
             if(d.status) {
                 this.props.handleUser({
@@ -15,9 +22,14 @@ export default class CheckSignStatus extends React.Component {
                     auth: d.is_super
                 });
             }
-            this.props.handler(d.status, () => {
-                this.props.redirect(this.props.isSignUp ? '/main' : '/sign');
-            });
+            let statusCallback = ((context) => {
+                let ctx = context;
+                return  () => {
+                    console.log('登陆状态'+ ctx.props.isSignUp);
+                    this.props.redirect(ctx.props.isSignUp ? '/main' : '/sign');
+                }
+            })(this);
+            this.props.handler(d.status, statusCallback);
         }
         // if (r.status) {
         //     this.props.handler(d.status, () => {

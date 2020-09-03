@@ -7,11 +7,18 @@ function AppLink(props) {
     //TODO: 登陆后的状态
     let onClick = async () => {
         let d = await httpGet(logout);
-        props.handleMessagePanel(true, d.msg, () => {
-            setTimeout(() => {
-                window.location.href = '/sign/sign_in';
-            }, 1000)
-        })
+        let cb = ((p, data) => {
+            let props = p;
+            let d = data;
+            return () => {
+                props.handleMessagePanel(true, d.msg, () => {
+                    setTimeout(() => {
+                        props.logoutRedirect('/sign/sign_in');
+                    }, 1000)
+                });
+            }
+        })(props, d);
+        props.logoutIntState(cb);
     };
 
     return (

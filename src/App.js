@@ -34,10 +34,38 @@ class App extends React.PureComponent {
             isMenuOn: false
         };
         this.canvas = React.createRef();
+        this.logoutRedirect = () => {};
+        this.handleLogoutRedirect = this.handleLogoutRedirect.bind(this);
         this.handleIsSignIn = this.handleIsSignIn.bind(this);
         this.handleMenu = this.handleMenu.bind(this);
         this.handleMessagePanel = this.handleMessagePanel.bind(this);
         this.handleUserInfo = this.handleUserInfo.bind(this);
+        this.logoutIntState = this.logoutIntState.bind(this);
+    }
+
+    logoutIntState(cb) {
+        this.setState({
+            userInfo: {
+                auth: '',
+                username: '',
+                avater: '',
+                name:'',
+                sex: '',
+                email: '',
+                quote: '',
+                apple: '',
+                github: '',
+                twitter: '',
+                youtube: '',
+                userAvatar: '',
+            },
+            isMenuOn: false,
+            isSignIn: false,
+        }, cb);
+    }
+
+    handleLogoutRedirect (cb) {
+        this.logoutRedirect = cb;
     }
 
     handleUserInfo(o, userCallback) {
@@ -120,7 +148,10 @@ class App extends React.PureComponent {
                             </CSSTransition>
                         </div>
                         <div className="right">
-                            <AppLink status={this.state.isSignIn} handleMessagePanel={this.handleMessagePanel}/>
+                            <AppLink status={this.state.isSignIn}
+                                     handleMessagePanel={this.handleMessagePanel}
+                                     logoutRedirect={this.logoutRedirect}
+                                     logoutIntState={this.logoutIntState}/>
                         </div>
                     </div>
                     <div className="body">
@@ -129,6 +160,7 @@ class App extends React.PureComponent {
                         </div>
                         <div className="content">
                             <AppRoute isSignIn={this.state.isSignIn}
+                                      handleLogoutRedirect={this.handleLogoutRedirect}
                                       handler={this.handleIsSignIn}
                                       user={this.state.userInfo}
                                       handleMessagePanel={this.handleMessagePanel}
