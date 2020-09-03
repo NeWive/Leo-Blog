@@ -48,6 +48,7 @@ export default class SignUp extends React.PureComponent {
                     if (result.status) {
                         setTimeout(() => {
                             ctx.props.redirect('/sign/sign_in');
+                            window.dispatchEvent(new Event('urlChange'));
                         }, 1200);
                     }
                     setTimeout(() => {
