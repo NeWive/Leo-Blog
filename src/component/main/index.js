@@ -1,7 +1,7 @@
 import React from "react";
 import RightContent from "./RightContent";
 import {httpGet} from "../../util";
-import {server, status} from "../../api";
+import {status} from "../../api";
 import {Redirect} from 'react-router-dom';
 import './index.scss';
 
@@ -47,6 +47,10 @@ export default class Main extends React.PureComponent {
                     <></>
                 )
             }
+            default:
+                return (
+                    <></>
+                )
         }
     }
 }
